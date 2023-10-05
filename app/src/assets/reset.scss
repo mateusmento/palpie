@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   font-weight: normal;
+  color: inherit;
 }
 
 *::before,
@@ -11,10 +12,29 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: #ccc;
+}
+
 body {
   min-height: 100vh;
 
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  display: block;
+  width: auto;
+
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px;
+
+  &:focus {
+    outline-style: solid;
+    outline-color: #ccc;
+    outline-width: 1px;
+  }
 }
