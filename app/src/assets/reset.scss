@@ -41,3 +41,20 @@ input {
     outline-width: 1px;
   }
 }
+
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
+  display: block;
+  background-color: #ddd;
+  border-style: solid;
+  border-color: #ccc;
+  cursor: pointer;
+
+  width: fit-content;
+
+  &:focus {
+    background-color: #ccc;
+  }
+}
