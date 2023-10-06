@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  palpie-postgres:
+    image: postgres:14
+    container_name: palpie-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - palpie-postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  palpie-pgadmin:
+    image: dpage/pgadmin4
+    container_name: palpie-pgadmin
+    restart: always
+    ports:
+      - ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}
+    volumes:
+      - palpie-pgadmin:/var/lib/pgadmin
+    env_file:
+      - .env
+
+volumes:
+  palpie-postgres:
+    name: palpie-postgres
+  palpie-pgadmin:
+    name: palpie-pgadmin
