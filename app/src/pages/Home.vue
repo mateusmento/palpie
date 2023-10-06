@@ -1,48 +1,12 @@
 <script setup lang="ts">
-import Field from '@/components/Field.vue';
-import Form from '@/components/Form.vue';
-import Button from '@/components/Button.vue';
-import type { Product } from '@/domain/products/product.type';
-import { ProductsApi } from '@/domain/products/products.api';
-
-const productsApi = new ProductsApi();
-
-async function createProduct(data: Partial<Product>) {
-  const product = await productsApi.create(data);
-  console.log(product);
-}
+import CreateProduct from './CreateProduct.vue';
+import Products from './Products.vue';
 </script>
 
 <template>
   <main class="grid cols-xl">
-    <section class="grid rows-lg card-lg">
-      <h2>Create Product</h2>
-      <Form class="grid rows-lg" @submit="createProduct">
-        <Field
-          name="title"
-          label="Title"
-          placeholder="Enter a title..."
-          class="grid rows-sm"
-          class-input="p-sm"
-        />
-        <Field
-          name="price"
-          label="Price"
-          placeholder="Enter a prize"
-          class="grid rows-sm"
-          class-input="p-sm"
-        />
-        <Field
-          name="quantity"
-          label="Quantity"
-          placeholder="Enter a quantity"
-          class="grid rows-sm"
-          class-input="p-sm"
-        />
-        <Button type="reset" class="p-sm">Clear</Button>
-        <Button type="submit" class="p-sm">Send</Button>
-      </Form>
-    </section>
+    <CreateProduct />
+    <Products />
   </main>
 </template>
 
