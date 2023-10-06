@@ -1,5 +1,46 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import Field from '@/components/Field.vue';
+import Form from '@/components/Form.vue';
+import Button from '@/components/Button.vue';
+
+interface Product {
+  id: number;
+  title: string;
+  price: string;
+}
+
+const product = ref<Partial<Product>>({ title: 'hello world' });
+</script>
 
 <template>
-  <main></main>
+  <main class="grid cols-xl">
+    <section class="grid rows-lg card-lg">
+      <h2>Create Product</h2>
+      <Form v-model="product" class="grid rows-lg">
+        <Field
+          name="title"
+          label="Title"
+          placeholder="Enter a title..."
+          class="grid rows-sm"
+          class-input="p-sm"
+        />
+        <Field
+          name="price"
+          label="Price"
+          placeholder="Enter a prize"
+          class="grid rows-sm"
+          class-input="p-sm"
+        />
+        <Button type="submit" class="p-sm">Send</Button>
+      </Form>
+    </section>
+  </main>
 </template>
+
+<style lang="scss" scoped>
+main {
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+</style>
