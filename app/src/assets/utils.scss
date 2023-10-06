@@ -1,0 +1,40 @@
+.flex {
+  display: flex;
+  @each $name, $size in $sizes {
+    &.rows-#{$name} {
+      flex-direction: column;
+      gap: #{$size};
+    }
+  }
+}
+
+.grid {
+  display: grid;
+
+  .rows {
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+  }
+
+  @each $name, $size in $sizes {
+    &.rows-#{$name} {
+      grid-auto-flow: row;
+      grid-auto-rows: auto;
+      gap: #{$size};
+    }
+  }
+
+  @each $name, $size in $sizes {
+    &.cols-#{$name} {
+      grid-auto-flow: column;
+      grid-auto-columns: auto;
+      gap: #{$size};
+    }
+  }
+}
+
+@each $name, $size in $sizes {
+  .p-#{$name} {
+    padding: #{$size};
+  }
+}
