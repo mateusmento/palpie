@@ -3,8 +3,14 @@ import Field from '@/components/Field.vue';
 import Form from '@/components/Form.vue';
 import Button from '@/components/Button.vue';
 import type { Product } from '@/domain/products/product.type';
+import { ProductsApi } from '@/domain/products/products.api';
 
-async function createProduct(data: Partial<Product>) {}
+const productsApi = new ProductsApi();
+
+async function createProduct(data: Partial<Product>) {
+  const product = await productsApi.create(data);
+  console.log(product);
+}
 </script>
 
 <template>
