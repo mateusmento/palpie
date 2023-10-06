@@ -2,12 +2,7 @@
 import Field from '@/components/Field.vue';
 import Form from '@/components/Form.vue';
 import Button from '@/components/Button.vue';
-
-interface Product {
-  id: number;
-  title: string;
-  price: string;
-}
+import type { Product } from '@/domain/products/product.type';
 
 async function createProduct(data: Partial<Product>) {}
 </script>
