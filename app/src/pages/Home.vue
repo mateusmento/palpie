@@ -32,6 +32,13 @@ const product = ref<Partial<Product>>({ title: 'hello world' });
           class="grid rows-sm"
           class-input="p-sm"
         />
+        <Field
+          name="quantity"
+          label="Quantity"
+          placeholder="Enter a quantity"
+          class="grid rows-sm"
+          class-input="p-sm"
+        />
         <Button type="submit" class="p-sm">Send</Button>
       </Form>
     </section>
