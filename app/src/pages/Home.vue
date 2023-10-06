@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Field from '@/components/Field.vue';
 import Form from '@/components/Form.vue';
 import Button from '@/components/Button.vue';
@@ -10,14 +9,14 @@ interface Product {
   price: string;
 }
 
-const product = ref<Partial<Product>>({ title: 'hello world' });
+async function createProduct(data: Partial<Product>) {}
 </script>
 
 <template>
   <main class="grid cols-xl">
     <section class="grid rows-lg card-lg">
       <h2>Create Product</h2>
-      <Form v-model="product" class="grid rows-lg">
+      <Form class="grid rows-lg" @submit="createProduct">
         <Field
           name="title"
           label="Title"
@@ -48,6 +47,6 @@ const product = ref<Partial<Product>>({ title: 'hello world' });
 <style lang="scss" scoped>
 main {
   padding: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 </style>
