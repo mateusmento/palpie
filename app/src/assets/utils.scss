@@ -5,6 +5,16 @@
       flex-direction: column;
       gap: #{$size};
     }
+
+    &.cols-#{$name} {
+      flex-direction: row;
+      gap: #{$size};
+    }
+
+    &.cols-auto {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -50,4 +60,8 @@
 
 .ml-auto {
   margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
