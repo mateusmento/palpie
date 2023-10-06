@@ -1,2 +1,15 @@
+$th: 5px;
+$sm: 10px;
+$md: 15px;
+$lg: 25px;
+$xl: 40px;
+
+$sizes:
+  th $th,
+  sm $sm,
+  md $md,
+  lg $lg,
+  xl $xl;
+
 @import './reset.scss';
 @import './base.scss';
