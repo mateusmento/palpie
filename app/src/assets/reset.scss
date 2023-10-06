@@ -5,6 +5,14 @@
   line-height: normal;
   color: inherit;
   font-weight: normal;
+  font-family: inherit;
+}
+
+::placeholder {
+  font-family: inherit;
+  line-height: normal;
+  font-size: inherit;
+  color: inherit;
 }
 
 *::before,
@@ -19,6 +27,7 @@
 
 body {
   min-height: 100vh;
+  font-size: 14px;
 
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
