@@ -14,6 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       logging: 'all',
       logger: 'advanced-console',
       autoLoadEntities: true,
+      synchronize: true,
     }),
     ProductModule,
   ],
