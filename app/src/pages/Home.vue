@@ -39,6 +39,7 @@ async function createProduct(data: Partial<Product>) {
           class="grid rows-sm"
           class-input="p-sm"
         />
+        <Button type="reset" class="p-sm">Clear</Button>
         <Button type="submit" class="p-sm">Send</Button>
       </Form>
     </section>
