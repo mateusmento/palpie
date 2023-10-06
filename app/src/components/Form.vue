@@ -6,7 +6,7 @@ const props = defineProps<{
   modelValue?: any;
 }>();
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'submit']);
 
 const state = ref(props.modelValue ?? {});
 
@@ -27,7 +27,7 @@ provide('form', {
 </script>
 
 <template>
-  <form v-bind="$attrs">
+  <form v-bind="$attrs" @submit.prevent="emit('submit', { ...state })">
     <slot />
   </form>
 </template>
