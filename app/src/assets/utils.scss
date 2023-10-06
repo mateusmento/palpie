@@ -24,6 +24,11 @@
     }
   }
 
+  .cols {
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+  }
+
   @each $name, $size in $sizes {
     &.cols-#{$name} {
       grid-auto-flow: column;
