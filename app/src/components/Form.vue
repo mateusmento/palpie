@@ -8,26 +8,40 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue', 'submit']);
 
-const state = ref(props.modelValue ?? {});
+const data = ref(props.modelValue ?? {});
+const undo = ref(props.modelValue ?? {});
+const changes = ref({});
 
+watch(data, (v) => props.modelValue !== v && emit('update:modelValue', v));
 watch(
   () => props.modelValue,
-  (v) => state.value !== v && (state.value = v)
+  (v) => data.value !== v && (data.value = v)
 );
 
 provide('form', {
   get: (field: string) => {
-    return get(state.value, field);
+    return get(data.value, field);
   },
   set: (field: string, value: any) => {
-    state.value = { ...set(state.value, field, value) };
-    emit('update:modelValue', state.value);
+    changes.value = set({ ...changes.value }, field, value);
+    data.value = set({ ...data.value }, field, value);
   },
 });
+
+function submit() {
+  emit('submit', { ...changes.value });
+  undo.value = data.value;
+  changes.value = {};
+}
+
+function reset() {
+  data.value = undo.value;
+  changes.value = {};
+}
 </script>
 
 <template>
-  <form v-bind="$attrs" @submit.prevent="emit('submit', { ...state })">
+  <form v-bind="$attrs" @submit.prevent="submit" @reset="reset">
     <slot />
   </form>
 </template>
