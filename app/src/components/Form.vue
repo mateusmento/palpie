@@ -41,7 +41,7 @@ function reset() {
 </script>
 
 <template>
-  <form v-bind="$attrs" @submit.prevent="submit" @reset="reset">
+  <form v-bind="$attrs" @submit.prevent="submit" @reset.prevent="reset">
     <slot />
   </form>
 </template>
