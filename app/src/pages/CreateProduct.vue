@@ -8,7 +8,7 @@ const productsStore = useProductsStore();
 </script>
 
 <template>
-  <section class="grid rows-lg card-lg">
+  <section class="create-product grid rows-lg card-lg">
     <h2>Create Product</h2>
     <Form class="grid rows-lg" @submit="productsStore.createProduct">
       <Field

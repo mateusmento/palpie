@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex rows-lg card-lg">
+  <section class="products flex rows-lg card-lg">
     <h2>Products</h2>
     <div class="list flex rows-sm">
       <div
