@@ -2,14 +2,20 @@
 import { provide, ref, watch } from 'vue';
 import { get, set } from 'lodash';
 
-const props = defineProps<{
-  modelValue?: any;
-}>();
+const props = withDefaults(
+  defineProps<{
+    modelValue?: any;
+    mode: 'create' | 'update';
+  }>(),
+  {
+    mode: 'create',
+  }
+);
 
 const emit = defineEmits(['update:modelValue', 'submit']);
 
 const data = ref(props.modelValue ?? {});
-const undo = ref(props.modelValue ?? {});
+const previous = ref(props.modelValue ?? {});
 const changes = ref({});
 
 watch(data, (v) => props.modelValue !== v && emit('update:modelValue', v));
@@ -30,12 +36,22 @@ provide('form', {
 
 function submit() {
   emit('submit', { ...changes.value });
-  undo.value = data.value;
-  changes.value = {};
+  previous.value = data.value;
+  clear();
 }
 
 function reset() {
-  data.value = undo.value;
+  if (props.mode === 'update') revert();
+  else clear();
+}
+
+function revert() {
+  data.value = previous.value;
+  changes.value = {};
+}
+
+function clear() {
+  if (props.mode === 'create') data.value = {};
   changes.value = {};
 }
 </script>
