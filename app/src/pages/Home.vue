@@ -4,7 +4,7 @@ import Products from './Products.vue';
 </script>
 
 <template>
-  <main class="grid cols-xl">
+  <main class="grid rows-xl">
     <CreateProduct />
     <Products />
   </main>
@@ -13,6 +13,6 @@ import Products from './Products.vue';
 <style lang="scss" scoped>
 main {
   padding: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
 }
 </style>
