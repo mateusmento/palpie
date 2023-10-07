@@ -16,11 +16,11 @@
   &.rows-auto {
     flex-direction: column;
     justify-content: space-between;
-    }
+  }
 
-    &.cols-auto {
-      flex-direction: row;
-      justify-content: space-between;
+  &.cols-auto {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -32,20 +32,18 @@
     grid-auto-rows: auto;
   }
 
-  @each $name, $size in $sizes {
-    &.rows-#{$name} {
-      grid-auto-flow: row;
-      grid-auto-rows: auto;
-      gap: #{$size};
-    }
-  }
-
   .cols {
     grid-auto-flow: column;
     grid-auto-columns: auto;
   }
 
   @each $name, $size in $sizes {
+    &.rows-#{$name} {
+      grid-auto-flow: row;
+      grid-auto-rows: auto;
+      gap: #{$size};
+    }
+
     &.cols-#{$name} {
       grid-auto-flow: column;
       grid-auto-columns: auto;
