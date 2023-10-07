@@ -1,13 +1,13 @@
 .flex {
   display: flex;
 
-  @each $name, $size in $sizes {
-    &.rows-#{$name} {
+  @each $size_name, $size in $sizes {
+    &.rows-#{$size_name} {
       flex-direction: column;
       gap: #{$size};
     }
 
-    &.cols-#{$name} {
+    &.cols-#{$size_name} {
       flex-direction: row;
       gap: #{$size};
     }
@@ -37,14 +37,14 @@
     grid-auto-columns: auto;
   }
 
-  @each $name, $size in $sizes {
-    &.rows-#{$name} {
+  @each $size_name, $size in $sizes {
+    &.rows-#{$size_name} {
       grid-auto-flow: row;
       grid-auto-rows: auto;
       gap: #{$size};
     }
 
-    &.cols-#{$name} {
+    &.cols-#{$size_name} {
       grid-auto-flow: column;
       grid-auto-columns: auto;
       gap: #{$size};
@@ -52,20 +52,32 @@
   }
 }
 
-@each $name, $size in $sizes {
-  .p-#{$name} {
-    padding: #{$size};
-  }
-}
-
 .w-fit {
   width: fit-content;
 }
 
-.ml-auto {
-  margin-left: auto;
+@each $size_name, $size in $sizes {
+  .m-#{$size_name} {
+    padding: #{$size};
+  }
+
+  .p-#{$size_name} {
+    padding: #{$size};
+  }
+
+  .g-#{$size_name} {
+    gap: #{$size};
+  }
 }
 
-.mr-auto {
-  margin-right: auto;
+@each $side_name, $side in $sides {
+  @each $size_name, $size in $sizes {
+    .m#{$side_name}-#{$size_name} {
+      margin-#{$side}: #{$size};
+    }
+
+    .p#{$side_name}-#{$size_name} {
+      padding-#{$side}: #{$size};
+    }
+  }
 }
