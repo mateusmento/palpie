@@ -6,13 +6,19 @@ import Products from './Products.vue';
 <template>
   <main class="grid rows-xl">
     <CreateProduct />
-    <Products />
+    <div class="products-container">
+      <Products />
+    </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
 main {
   padding: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+}
+
+.products-container {
+  grid-row: span 2;
 }
 </style>
