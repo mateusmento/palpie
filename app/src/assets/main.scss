@@ -5,11 +5,18 @@ $lg: 25px;
 $xl: 40px;
 
 $sizes:
+  'auto' auto,
   th $th,
   sm $sm,
   md $md,
   lg $lg,
   xl $xl;
+
+$sides:
+  t top,
+  b bottom,
+  l left,
+  r right;
 
 @import './reset.scss';
 @import './base.scss';
