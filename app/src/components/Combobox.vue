@@ -1,26 +1,30 @@
 <script lang="ts" setup>
 import { get } from 'lodash';
-import { inject, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 
 const props = defineProps<{
-  modelValue?: any;
-  name?: string;
   options: any[] | ((query: string) => any[] | Promise<any[]>);
   trackBy: string | ((v: any) => any);
   labelBy: string | ((v: any) => any);
   classSearch?: string;
 }>();
 
-const emit = defineEmits(['update:modelValue']);
-
 const query = ref('');
 const items = ref<any[]>([]);
 
 const state = ref();
 
-const form = inject('form', {
-  get: (field: string) => state.value,
-  set: (field: string, value: any) => (state.value = value),
+const field = inject('field', {
+  get: () => state.value,
+  set: (value: any) => (state.value = value),
+});
+
+const value = computed({
+  get: () => field.get(),
+  set: (value: any) => {
+    state.value = value;
+    field.set(value);
+  },
 });
 
 watch(query, async () => {
@@ -32,7 +36,7 @@ watch(query, async () => {
 });
 
 function select(item: any) {
-  emit('update:modelValue', item);
+  field.set(item);
 }
 
 function labelOf(value: any) {
@@ -54,7 +58,7 @@ function trackOf(value: any) {
         v-for="item of items"
         :key="trackOf(item)"
         @click="select(item)"
-        :class="{ active: trackOf(modelValue) === trackOf(item) }"
+        :class="{ active: trackOf(value) === trackOf(item) }"
       >
         {{ labelOf(item) }}
       </li>
