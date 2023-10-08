@@ -7,7 +7,7 @@ import { omit } from 'lodash';
 const props = defineProps<{
   label: string;
   name: string;
-  classInput: any;
+  classInput?: any;
 }>();
 
 const fieldId = computed(() => uniqid(props.name + '-'));
