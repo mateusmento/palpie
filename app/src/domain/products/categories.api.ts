@@ -1,8 +1,10 @@
 import axios from '@/core/axios';
 
+export type FindCategoryCriteria = { name?: string };
+
 export class CategoriesApi {
-  findAll() {
-    return axios.get('/categories').then((res) => res.data);
+  findAll(criteria: FindCategoryCriteria = {}) {
+    return axios.get<any[]>('/categories', { params: criteria }).then((res) => res.data);
   }
 
   create(data: any) {
