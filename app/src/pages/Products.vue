@@ -2,7 +2,7 @@
 import { useCategoryStore } from '@/domain/products/category.store';
 import type { Category } from '@/domain/products/category.type';
 import { useProductsStore } from '@/domain/products/products.store';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 const productsStore = useProductsStore();
 const categoryStore = useCategoryStore();
@@ -12,6 +12,10 @@ const activeCategory = ref<Category>();
 onMounted(() => {
   productsStore.fetch();
   categoryStore.fetch();
+});
+
+watch(activeCategory, (category) => {
+  productsStore.fetch({ categoryId: category?.id });
 });
 </script>
 

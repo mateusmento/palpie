@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { Product } from './product.type';
-import { ProductsApi } from './products.api';
+import { ProductsApi, type FindProductsCriteria } from './products.api';
 
 const productsApi = new ProductsApi();
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([]);
 
-  async function fetch() {
-    products.value = await productsApi.findAll();
+  async function fetch(criteria: FindProductsCriteria = {}) {
+    products.value = await productsApi.findAll(criteria);
   }
 
   async function create(data: Partial<Product>) {

@@ -1,9 +1,11 @@
 import axios from '@/core/axios';
 import type { Product } from './product.type';
 
+export type FindProductsCriteria = { categoryId?: number };
+
 export class ProductsApi {
-  findAll() {
-    return axios.get('/products').then((res) => res.data);
+  findAll(criteria: FindProductsCriteria = {}) {
+    return axios.get('/products', { params: criteria }).then((res) => res.data);
   }
 
   create(data: Partial<Product>) {

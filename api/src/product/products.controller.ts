@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { Repository } from 'typeorm';
@@ -11,8 +11,14 @@ export class ProductsController {
   ) {}
 
   @Get()
-  findAll() {
-    return this.productRepo.find();
+  findAll(@Query() { categoryId }: any) {
+    let qb = this.productRepo.createQueryBuilder('product');
+    if (categoryId) {
+      qb = qb
+        .leftJoin('product.categories', 'category')
+        .where('category.id = :categoryId', { categoryId });
+    }
+    return qb.getMany();
   }
 
   @Post()
