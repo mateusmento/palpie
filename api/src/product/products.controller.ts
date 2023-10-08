@@ -23,6 +23,7 @@ export class ProductsController {
 
   @Post()
   create(@Body() data: any) {
+    if (data.category) data.categories = [data.category];
     return this.productRepo.save(data);
   }
 }
