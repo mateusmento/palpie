@@ -15,6 +15,9 @@ onMounted(() => {
 <template>
   <section class="products flex rows-lg card-lg">
     <h2 class="products__title">Products</h2>
+    <div class="grid cols-lg">
+      <div v-for="category of categoryStore.categories" :key="category.id">{{ category.name }}</div>
+    </div>
     <div class="list grid rows-lg">
       <div
         v-for="product of productsStore.products"
