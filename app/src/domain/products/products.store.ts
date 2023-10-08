@@ -8,18 +8,18 @@ const productsApi = new ProductsApi();
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([]);
 
-  async function fetchProducts() {
+  async function fetch() {
     products.value = await productsApi.findAll();
   }
 
-  async function createProduct(data: Partial<Product>) {
+  async function create(data: Partial<Product>) {
     const product = await productsApi.create(data);
     products.value.push(product);
   }
 
   return {
     products,
-    fetchProducts,
-    createProduct,
+    fetch,
+    create,
   };
 });

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
+import { useCategoryStore } from '@/domain/products/category.store';
 import { useProductsStore } from '@/domain/products/products.store';
 import { onMounted } from 'vue';
 
 const productsStore = useProductsStore();
+const categoryStore = useCategoryStore();
 
 onMounted(() => {
-  productsStore.fetchProducts();
+  productsStore.fetch();
+  categoryStore.fetch();
 });
 </script>
 

@@ -4,13 +4,13 @@ import Form from '@/components/Form.vue';
 import Button from '@/components/Button.vue';
 import { useProductsStore } from '@/domain/products/products.store';
 
-const productsStore = useProductsStore();
+const productStore = useProductsStore();
 </script>
 
 <template>
   <section class="create-product grid rows-lg card-lg">
     <h2>Create Product</h2>
-    <Form class="grid rows-lg" @submit="productsStore.createProduct">
+    <Form class="grid rows-lg" @submit="productStore.create">
       <Field
         name="title"
         label="Title"
