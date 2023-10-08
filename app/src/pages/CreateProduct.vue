@@ -17,7 +17,11 @@ function searchCategories(query: string) {
 <template>
   <section class="create-product grid rows-lg card-lg">
     <h2>Create Product</h2>
-    <Form class="grid rows-lg" @submit="productStore.create">
+    <Form
+      v-model="productStore.product"
+      class="grid rows-lg"
+      @submit="productStore.create(productStore.product ?? {})"
+    >
       <Field
         name="title"
         label="Title"

@@ -7,6 +7,7 @@ const productsApi = new ProductsApi();
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([]);
+  const product = ref<Product>();
 
   async function fetch(criteria: FindProductsCriteria = {}) {
     products.value = await productsApi.findAll(criteria);
@@ -19,6 +20,7 @@ export const useProductsStore = defineStore('products', () => {
 
   return {
     products,
+    product,
     fetch,
     create,
   };

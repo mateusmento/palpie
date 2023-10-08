@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useCategoryStore } from '@/domain/products/category.store';
 import type { Category } from '@/domain/products/category.type';
+import type { Product } from '@/domain/products/product.type';
 import { useProductsStore } from '@/domain/products/products.store';
 import { onMounted, ref, watch } from 'vue';
 
@@ -17,6 +18,10 @@ onMounted(() => {
 watch(activeCategory, (category) => {
   productsStore.fetch({ categoryId: category?.id });
 });
+
+function editProduct(product: Product) {
+  productsStore.product = product;
+}
 </script>
 
 <template>
@@ -38,6 +43,7 @@ watch(activeCategory, (category) => {
         v-for="product of productsStore.products"
         :key="product.id"
         class="list-item g-md card-lg"
+        @click="editProduct(product)"
       >
         <div class="title">{{ product.title }}</div>
         <div class="price-quantity flex rows-md">
