@@ -8,6 +8,7 @@ const props = defineProps<{
   options: any[] | ((query: string) => any[] | Promise<any[]>);
   trackBy: string | ((v: any) => any);
   labelBy: string | ((v: any) => any);
+  classSearch?: string;
 }>();
 
 const emit = defineEmits(['update:modelValue']);
@@ -47,7 +48,7 @@ function trackOf(value: any) {
 
 <template>
   <div class="combobox">
-    <input v-model="query" />
+    <input v-model="query" :class="classSearch" />
     <ul>
       <li
         v-for="item of items"
