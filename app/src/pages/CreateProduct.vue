@@ -39,7 +39,9 @@ function searchCategories(query: string) {
         class="grid rows-sm"
         class-input="p-sm"
       />
-      <Combobox :options="searchCategories" track-by="id" label-by="name" class-search="p-sm" />
+      <Field name="category" label="Category" class="grid rows-sm">
+        <Combobox :options="searchCategories" track-by="id" label-by="name" class-search="p-sm" />
+      </Field>
       <div class="grid cols-md w-fit ml-auto">
         <Button type="reset" class="p-sm">Clear</Button>
         <Button type="submit" class="p-sm">Send</Button>
