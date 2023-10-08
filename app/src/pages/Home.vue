@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CreateCategory from './CreateCategory.vue';
 import CreateProduct from './CreateProduct.vue';
 import Products from './Products.vue';
 </script>
@@ -9,6 +10,7 @@ import Products from './Products.vue';
     <div class="products-container">
       <Products />
     </div>
+    <CreateCategory />
   </main>
 </template>
 
