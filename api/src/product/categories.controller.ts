@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
 import { Repository } from 'typeorm';
@@ -11,8 +11,12 @@ export class CategoriesController {
   ) {}
 
   @Get()
-  findAll() {
-    return this.categoryRepo.find();
+  findAll(@Query() { name }: any) {
+    let qb = this.categoryRepo.createQueryBuilder('category');
+    if (name) {
+      qb = qb.where('lower(category.name) like :query', { query: `%${name.toLowerCase()}%` });
+    }
+    return qb.getMany();
   }
 
   @Post()
