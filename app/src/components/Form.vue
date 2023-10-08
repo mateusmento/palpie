@@ -5,7 +5,7 @@ import { get, set } from 'lodash';
 const props = withDefaults(
   defineProps<{
     modelValue?: any;
-    mode: 'create' | 'update';
+    mode?: 'create' | 'update';
   }>(),
   {
     mode: 'create',
