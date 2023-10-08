@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { useCategoryStore } from '@/domain/products/category.store';
+import type { Category } from '@/domain/products/category.type';
 import { useProductsStore } from '@/domain/products/products.store';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const productsStore = useProductsStore();
 const categoryStore = useCategoryStore();
+
+const activeCategory = ref<Category>();
 
 onMounted(() => {
   productsStore.fetch();
@@ -16,7 +19,13 @@ onMounted(() => {
   <section class="products flex rows-lg card-lg">
     <h2 class="products__title">Products</h2>
     <div class="flex cols-md">
-      <div v-for="category of categoryStore.categories" :key="category.id" class="category p-sm">
+      <div
+        v-for="category of categoryStore.categories"
+        :key="category.id"
+        class="category p-sm"
+        :class="{ active: category.id === activeCategory?.id }"
+        @click="activeCategory = category !== activeCategory ? category : undefined"
+      >
         {{ category.name }}
       </div>
     </div>
@@ -57,6 +66,7 @@ onMounted(() => {
   background-color: rgb(215, 215, 255);
   color: rgb(80, 80, 211);
   text-align: center;
+  cursor: pointer;
   &.active {
     background-color: rgb(80, 80, 211);
     color: #fff;
