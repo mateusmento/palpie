@@ -15,8 +15,10 @@ onMounted(() => {
 <template>
   <section class="products flex rows-lg card-lg">
     <h2 class="products__title">Products</h2>
-    <div class="grid cols-lg">
-      <div v-for="category of categoryStore.categories" :key="category.id">{{ category.name }}</div>
+    <div class="flex cols-md">
+      <div v-for="category of categoryStore.categories" :key="category.id" class="category p-sm">
+        {{ category.name }}
+      </div>
     </div>
     <div class="list grid rows-lg">
       <div
@@ -45,6 +47,20 @@ onMounted(() => {
 
 .products__title {
   color: rgb(41, 20, 88);
+}
+
+.category {
+  width: fit-content;
+  min-width: 80px;
+  padding: 5px 10px;
+  border-radius: 50px;
+  background-color: rgb(215, 215, 255);
+  color: rgb(80, 80, 211);
+  text-align: center;
+  &.active {
+    background-color: rgb(80, 80, 211);
+    color: #fff;
+  }
 }
 
 .list {
