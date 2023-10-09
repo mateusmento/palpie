@@ -13,6 +13,8 @@ export class ProductsController {
   @Get()
   findAll(@Query() { categoryId }: any) {
     let qb = this.productRepo.createQueryBuilder('product');
+    qb.leftJoinAndSelect('product.categories', 'c');
+
     if (categoryId) {
       qb = qb
         .leftJoin('product.categories', 'category')
