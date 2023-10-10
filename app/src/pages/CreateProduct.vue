@@ -3,8 +3,8 @@ import Field from '@/components/Field.vue';
 import Form from '@/components/Form.vue';
 import Button from '@/components/Button.vue';
 import { useProductsStore } from '@/domain/products/products.store';
-import Combobox from '@/components/Combobox.vue';
 import { CategoriesApi } from '@/domain/products/categories.api';
+import Multiselect from '@/components/Multiselect.vue';
 
 const productStore = useProductsStore();
 const categoryApi = new CategoriesApi();
@@ -43,8 +43,13 @@ function searchCategories(query: string) {
         class="grid rows-sm"
         class-input="p-sm"
       />
-      <Field name="category" label="Category" class="grid rows-sm">
-        <Combobox :options="searchCategories" track-by="id" label-by="name" class-search="p-sm" />
+      <Field name="categories" label="Category" class="grid rows-sm">
+        <Multiselect
+          :options="searchCategories"
+          track-by="id"
+          label-by="name"
+          class-search="p-sm"
+        />
       </Field>
       <div class="grid cols-md w-fit ml-auto">
         <Button type="reset" class="p-sm">Clear</Button>
