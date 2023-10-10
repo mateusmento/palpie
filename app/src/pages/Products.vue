@@ -42,7 +42,7 @@ function editProduct(product: Product) {
       <div
         v-for="product of productsStore.products"
         :key="product.id"
-        class="list-item g-md card-lg"
+        class="list-item g-md card-md"
         @click="editProduct(product)"
       >
         <div class="title">{{ product.title }}</div>
