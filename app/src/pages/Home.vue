@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Cart from './Cart.vue';
 import CreateCategory from './CreateCategory.vue';
 import CreateProduct from './CreateProduct.vue';
 import Products from './Products.vue';
@@ -6,10 +7,11 @@ import Products from './Products.vue';
 
 <template>
   <main class="grid rows-xl">
-    <CreateProduct />
+    <CreateProduct class="create-product" />
     <div class="products-container">
       <Products />
     </div>
+    <Cart />
     <CreateCategory />
   </main>
 </template>
@@ -17,10 +19,11 @@ import Products from './Products.vue';
 <style lang="scss" scoped>
 main {
   padding: 10px;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 380px 3fr 1fr;
+  grid-template-rows: auto auto auto;
 }
 
 .products-container {
-  grid-row: span 2;
+  grid-row: span 3;
 }
 </style>
