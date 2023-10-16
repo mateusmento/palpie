@@ -1,17 +1,8 @@
 <script lang="ts" setup>
 import PalCartItem from '@/components/PalCartItem.vue';
-import type { CartItem } from '@/domain/cart/cart-item.type';
 import { useCartStore } from '@/domain/cart/cart.store';
 
 const cart = useCartStore();
-
-function addQuantity(cartItem: CartItem) {
-  cartItem.quantity++;
-}
-
-function removeQuantity(cartItem: CartItem) {
-  cartItem.quantity--;
-}
 </script>
 
 <template>
@@ -25,8 +16,8 @@ function removeQuantity(cartItem: CartItem) {
         v-for="cartItem of cart.items"
         :key="cartItem.id"
         :cart-item="cartItem"
-        @add-quantity="addQuantity(cartItem)"
-        @remove-quantity="removeQuantity(cartItem)"
+        @add-quantity="cart.incrementQuantity(cartItem)"
+        @remove-quantity="cart.decrementQuantity(cartItem)"
       />
     </div>
   </section>

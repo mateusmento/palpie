@@ -14,8 +14,21 @@ export const useCartStore = defineStore('cart', () => {
     });
   }
 
+  function incrementQuantity(cartItem: CartItem) {
+    cartItem.quantity++;
+  }
+
+  function decrementQuantity(cartItem: CartItem) {
+    cartItem.quantity--;
+    if (cartItem.quantity === 0) {
+      items.value = items.value.filter((item) => item.id !== cartItem.id);
+    }
+  }
+
   return {
     items,
     addItem,
+    incrementQuantity,
+    decrementQuantity,
   };
 });
