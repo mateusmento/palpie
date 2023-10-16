@@ -5,10 +5,18 @@ const props = defineProps<{
   cartItem: CartItem;
 }>();
 
-const emit = defineEmits(['edit']);
+const emit = defineEmits(['edit', 'add-quantity', 'remove-quantity']);
 
 function editProduct() {
   emit('edit', props.cartItem);
+}
+
+function addQuantity() {
+  emit('add-quantity');
+}
+
+function removeQuantity() {
+  emit('remove-quantity');
 }
 </script>
 
@@ -16,12 +24,12 @@ function editProduct() {
   <div class="product g-md card-md" @click="editProduct">
     <div class="title">{{ cartItem.product.title }}</div>
     <div class="price-quantity flex rows-md">
-      <div class="price">${{ cartItem.product.price }}</div>
+      <div class="price">${{ cartItem.product.price * cartItem.quantity }}</div>
       <div class="quantity">{{ cartItem.quantity }} units</div>
     </div>
     <div class="buttons flex rows-sm ml-auto">
-      <button class="buy-btn mt-auto">Buy</button>
-      <button class="addto-cart-button">Add to cart</button>
+      <button class="add-btn mt-auto" @click="addQuantity">Add More</button>
+      <button class="remove-btn" @click="removeQuantity">One Less</button>
     </div>
   </div>
 </template>
@@ -58,7 +66,7 @@ function editProduct() {
   color: rgb(94, 83, 119);
 }
 
-.buy-btn {
+.add-btn {
   padding: 10px 15px;
   min-width: 80px;
   border-radius: 10px;
@@ -72,7 +80,7 @@ function editProduct() {
   }
 }
 
-.addto-cart-button {
+.remove-btn {
   padding: 5px 10px;
   border-radius: 5px;
   min-width: 100px;
