@@ -71,7 +71,35 @@ function trackOf(value: any) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.combobox {
+  padding: 10px;
+  border: 1px solid #ccc;
+
+  &:focus-within {
+    outline: 1px solid #ccc;
+  }
+}
+
+.selection {
+  display: flex;
+  gap: 10px;
+}
+
+.selected-item {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: rgb(215, 215, 255);
+  color: rgb(80, 80, 211);
+  font-size: 12px;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
 .active {
   background-color: #ddd;
 }
