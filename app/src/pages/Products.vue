@@ -27,7 +27,7 @@ function editProduct(product: Product) {
 <template>
   <section class="products flex rows-lg card-lg">
     <h2 class="products__title">Products</h2>
-    <div class="flex cols-md">
+    <div class="flex wrap cols-md">
       <div
         v-for="category of categoryStore.categories"
         :key="category.id"
