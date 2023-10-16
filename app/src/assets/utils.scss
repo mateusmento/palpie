@@ -1,6 +1,10 @@
 .flex {
   display: flex;
 
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
   @each $size_name, $size in $sizes {
     &.rows-#{$size_name} {
       flex-direction: column;
