@@ -8,10 +8,12 @@ import Products from './Products.vue';
 <template>
   <main class="grid rows-xl">
     <CreateProduct class="create-product" />
-    <div class="products-container">
+    <div class="products">
       <Products />
     </div>
-    <Cart />
+    <div class="cart">
+      <Cart />
+    </div>
     <CreateCategory />
   </main>
 </template>
@@ -23,7 +25,11 @@ main {
   grid-template-rows: auto auto auto;
 }
 
-.products-container {
+.products {
+  grid-row: span 3;
+}
+
+.cart {
   grid-row: span 3;
 }
 </style>
