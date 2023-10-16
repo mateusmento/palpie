@@ -16,7 +16,10 @@ function removeQuantity(cartItem: CartItem) {
 
 <template>
   <section class="flex rows-lg card-lg">
-    <h2>Cart</h2>
+    <div class="flex cols-auto">
+      <h2>Cart</h2>
+      <button class="buy-btn">Buy</button>
+    </div>
     <div class="list grid rows-lg">
       <PalCartItem
         v-for="cartItem of cart.items"
@@ -33,5 +36,19 @@ function removeQuantity(cartItem: CartItem) {
 .list {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-auto-rows: 200px;
+}
+
+.buy-btn {
+  padding: 10px 15px;
+  min-width: 80px;
+  border-radius: 10px;
+  background-color: rgb(80, 80, 211);
+  border-color: rgb(80, 80, 211);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  &:focus {
+    border-color: rgb(128, 128, 218);
+  }
 }
 </style>
