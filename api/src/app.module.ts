@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CatalogModule } from './catalog/catalog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       namingStrategy: new SnakeNamingStrategy(),
     }),
     CatalogModule,
+    InventoryModule,
   ],
   controllers: [],
   providers: [],
