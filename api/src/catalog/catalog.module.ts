@@ -9,4 +9,4 @@ import { CategoriesController } from './categories.controller';
   imports: [TypeOrmModule.forFeature([Product, Category])],
   controllers: [ProductsController, CategoriesController],
 })
-export class ProductModule {}
+export class CatalogModule {}

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ProductModule } from './product/product.module';
+import { CatalogModule } from './catalog/catalog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
@@ -18,7 +18,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
-    ProductModule,
+    CatalogModule,
   ],
   controllers: [],
   providers: [],
