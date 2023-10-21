@@ -3,6 +3,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { InventoryModule } from './inventory/inventory.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { InventoryModule } from './inventory/inventory.module';
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
+    EventEmitterModule.forRoot(),
     CatalogModule,
     InventoryModule,
   ],

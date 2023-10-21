@@ -1,17 +1,20 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from './product.entity';
+import { Product } from '../entities/product.entity';
 import { Repository } from 'typeorm';
 
-@Controller('products')
-export class ProductsController {
+export class FindProducts {
+  categoryId: number;
+}
+
+@QueryHandler(FindProducts)
+export class FindProductsQuery implements IQueryHandler<FindProducts> {
   constructor(
     @InjectRepository(Product)
     private productRepo: Repository<Product>
   ) {}
 
-  @Get()
-  findAll(@Query() { categoryId }: any) {
+  async execute({ categoryId }: FindProducts) {
     let qb = this.productRepo.createQueryBuilder('product');
     qb.leftJoinAndSelect('product.categories', 'c');
 
@@ -20,12 +23,7 @@ export class ProductsController {
         .leftJoin('product.categories', 'category')
         .where('category.id = :categoryId', { categoryId });
     }
-    return qb.getMany();
-  }
 
-  @Post()
-  create(@Body() data: any) {
-    if (data.category) data.categories = [data.category];
-    return this.productRepo.save(data);
+    return qb.getMany();
   }
 }

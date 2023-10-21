@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from './category.entity';
+import { Category } from '../entities/category.entity';
 import { Repository } from 'typeorm';
 
 @Controller('categories')
