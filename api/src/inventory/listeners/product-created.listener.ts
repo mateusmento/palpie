@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Availability } from '../availability.entity';
+import { ProductAvailability } from '../entities/product-availability.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProductCreatedListener {
   constructor(
-    @InjectRepository(Availability)
-    private availabilityRepo: Repository<Availability>
+    @InjectRepository(ProductAvailability)
+    private availabilityRepo: Repository<ProductAvailability>
   ) {}
 
   @OnEvent('product.created')
   async handle(data: any) {
     this.availabilityRepo.save({
+      id: data.id,
       availability: 0,
-      productId: data.id,
     });
   }
 }

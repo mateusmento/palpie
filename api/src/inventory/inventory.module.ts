@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Availability } from './availability.entity';
+import { ProductAvailability } from './entities/product-availability.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Availability])],
+  imports: [TypeOrmModule.forFeature([ProductAvailability])],
 })
 export class InventoryModule {}
