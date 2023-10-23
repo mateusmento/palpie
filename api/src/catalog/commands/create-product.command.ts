@@ -9,7 +9,7 @@ export class CreateProduct {
 }
 
 @CommandHandler(CreateProduct)
-export class CreateProductHandler implements ICommandHandler<CreateProduct> {
+export class CreateProductCommand implements ICommandHandler<CreateProduct> {
   constructor(
     @InjectRepository(Product)
     private productRepo: Repository<Product>,
