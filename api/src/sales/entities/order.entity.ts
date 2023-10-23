@@ -21,6 +21,6 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => OrderItem, (item) => item.order)
+  @OneToMany(() => OrderItem, (item) => item.order, { cascade: ['insert'] })
   items: OrderItem[];
 }
