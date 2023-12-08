@@ -15,7 +15,7 @@ export class ProductCreatedListener {
   async handle(data: any) {
     this.availabilityRepo.save({
       id: data.id,
-      availability: 0,
+      quantity: 0,
     });
   }
 }
