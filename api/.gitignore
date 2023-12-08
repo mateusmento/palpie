@@ -36,6 +36,8 @@ lerna-debug.log*
 
 # Terraform
 
+aws-palpie
+aws-palpie.pub
 **/.terraform/*
 *.tfstate
 *.tfstate.*

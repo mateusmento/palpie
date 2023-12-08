@@ -36,7 +36,7 @@ watch(query, async () => {
 });
 
 function select(item: any) {
-  selected.value = [...selected.value, item];
+  selected.value = [...(selected.value ?? []), item];
 }
 
 function labelOf(value: any) {

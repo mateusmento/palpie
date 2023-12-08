@@ -3,9 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../entities/product.entity';
 import { Repository } from 'typeorm';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Allow } from 'class-validator';
 
 export class CreateProduct {
+  @Allow()
   title: string;
+  @Allow()
+  price: number;
+  @Allow()
+  quantity: number;
+  @Allow()
+  categories: any[];
 }
 
 @CommandHandler(CreateProduct)
@@ -17,7 +25,8 @@ export class CreateProductCommand implements ICommandHandler<CreateProduct> {
   ) {}
 
   async execute(data: CreateProduct) {
-    const product = this.productRepo.save(data);
+    console.log(data);
+    const product = await this.productRepo.save(data);
     await this.emitter.emitAsync('product.created', product);
     return product;
   }

@@ -37,7 +37,7 @@ provide('form', {
 function submit() {
   emit('submit', { ...changes.value });
   previous.value = data.value;
-  clear();
+  // clear();
 }
 
 function reset() {

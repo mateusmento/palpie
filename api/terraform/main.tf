@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 4.16"
     }
   }
@@ -19,25 +19,40 @@ provider "aws" {
   region = "sa-east-1"
 }
 
-data "aws_default_vpc" "default" {
+data "aws_vpc" "default" {
   default = true
 }
 
+resource "aws_key_pair" "aws-palpie" {
+  key_name = "aws-palpie"
+  # ssh-keygen -t rsa -f aws-palpie
+  public_key = file("./aws-palpie.pub")
+}
+
 resource "aws_security_group" "palpie-postgres-sg" {
-  name = "palpie-postgres-sg"
-  vpc_id = aws_default_vpc.default.id
+  name   = "palpie-postgres-sg"
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
-    protocol = "tpc"
-    from_port = 5432
-    to_port = 5432
-    cidr_blocks = [aws_security_group.palpie-api-sg]
+    protocol    = "tcp"
+    from_port   = 22
+    to_port     = 22
+    cidr_blocks = ["0.0.0.0/0"]
+    # cidr_blocks = [aws_security_group.palpie-api-sg]
+  }
+
+  ingress {
+    protocol    = "tcp"
+    from_port   = 5432
+    to_port     = 5432
+    cidr_blocks = ["0.0.0.0/0"]
+    # cidr_blocks = [aws_security_group.palpie-api-sg]
   }
 
   egress {
-    protocol = "-1"
-    from_port = 0
-    to_port = 0
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -46,21 +61,32 @@ resource "aws_security_group" "palpie-postgres-sg" {
   }
 }
 
+resource "aws_instance" "palpie-postgres" {
+  ami                    = "ami-05dc908211c15c11d"
+  instance_type          = "t2.micro"
+  key_name               = "aws-palpie"
+  vpc_security_group_ids = [aws_security_group.palpie-postgres-sg.id]
+  user_data              = file("./install-postgres.sh")
+  tags = {
+    Name = "palpie-postgres"
+  }
+}
+
 resource "aws_security_group" "palpie-api-sg" {
-  name = "palpie-api-sg"
-  vpc_id = aws_default_vpc.default.id
+  name   = "palpie-api-sg"
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
-    protocol = "tpc"
-    from_port = 80
-    to_port = 80
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol = "-1"
-    from_port = 0
-    to_port = 0
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -69,30 +95,21 @@ resource "aws_security_group" "palpie-api-sg" {
   }
 }
 
-resource "aws_key_pair" "aws-palpie" {
-  key_name = "aws-palpie"
-  # ssh-keygen -t rsa -f aws-palpie
-  public_key = file("aws-palpie.pub")
-}
-
-resource "aws_instance" "palpie-postgres" {
-  ami = "ami-05dc908211c15c11d"
-  instance_type = "t2.micro"
-  key_name = "aws-palpie"
-  vpc_security_group_ids = [aws_security_group.palpie-postgres-sg]
-  user_data = file("install-postgres.sh")
-  tags = {
-    Name = "palpie-postgres"
-  }
-}
-
 resource "aws_instance" "palpie-api" {
-  ami = "ami-05dc908211c15c11d"
-  instance_type = "t2.micro"
-  key_name = "aws-palpie"
-  vpc_security_group_ids = [aws_security_group.palpie-api-sg]
-  user_data = file("install-palpie-api.sh")
+  ami                    = "ami-05dc908211c15c11d"
+  instance_type          = "t2.micro"
+  key_name               = "aws-palpie"
+  vpc_security_group_ids = [aws_security_group.palpie-api-sg.id]
+  user_data              = file("./install-palpie-api.sh")
   tags = {
     Name = "palpie-api"
   }
+}
+
+output "palpie-postgres-host" {
+  value = aws_instance.palpie-postgres.public_dns
+}
+
+output "palpie-api-host" {
+  value = aws_instance.palpie-api.public_dns
 }

@@ -5,6 +5,7 @@ import Button from '@/components/Button.vue';
 import { useProductsStore } from '@/domain/products/products.store';
 import { CategoriesApi } from '@/domain/products/categories.api';
 import Multiselect from '@/components/Multiselect.vue';
+import type { Product } from '@/domain/products/product.type';
 
 const productStore = useProductsStore();
 const categoryApi = new CategoriesApi();
@@ -12,16 +13,19 @@ const categoryApi = new CategoriesApi();
 function searchCategories(query: string) {
   return categoryApi.findAll({ name: query });
 }
+
+function createProduct() {
+  const product = productStore.product ?? ({} as Product);
+  product.price = +product.price;
+  product.quantity = +product.quantity;
+  productStore.create(product);
+}
 </script>
 
 <template>
   <section class="create-product grid rows-lg card-lg">
     <h2>Create Product</h2>
-    <Form
-      v-model="productStore.product"
-      class="grid rows-lg"
-      @submit="productStore.create(productStore.product ?? {})"
-    >
+    <Form v-model="productStore.product" class="grid rows-lg" @submit="createProduct">
       <Field
         name="title"
         label="Title"

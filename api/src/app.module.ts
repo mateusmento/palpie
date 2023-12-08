@@ -9,11 +9,12 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      // host: 'localhost',
+      host: 'ec2-15-228-8-11.sa-east-1.compute.amazonaws.com',
       port: 5432,
-      database: 'palpie',
-      username: 'palpie',
-      password: 'palpie',
+      database: 'postgres',
+      username: 'postgres',
+      password: 'postgres',
       logging: 'all',
       logger: 'advanced-console',
       autoLoadEntities: true,

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { SearchCategories } from '../queries/search-categories.query';
+import { CreateCategory } from '../commands/create-category.command';
 
 @Controller('categories')
 export class CategoriesController {
@@ -15,7 +16,7 @@ export class CategoriesController {
   }
 
   @Post()
-  create(@Body() command: any) {
+  create(@Body() command: CreateCategory) {
     return this.commandBus.execute(command);
   }
 }
