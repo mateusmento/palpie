@@ -8,9 +8,10 @@ import { CreateProductCommand } from './commands/create-product.command';
 import { CreateCategoryCommand } from './commands/create-category.command';
 import { FindProductsQuery } from './queries/find-products.query';
 import { SearchCategoriesQuery } from './queries/search-categories.query';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product, Category])],
+  imports: [TypeOrmModule.forFeature([Product, Category]), CqrsModule],
   controllers: [ProductsController, CategoriesController],
   providers: [
     CreateProductCommand,
