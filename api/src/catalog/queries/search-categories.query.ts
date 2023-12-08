@@ -2,9 +2,12 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from '../entities/category.entity';
 import { Repository } from 'typeorm';
+import { IsOptional, IsString } from 'class-validator';
 
 export class SearchCategories {
-  name: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
 }
 
 @QueryHandler(SearchCategories)

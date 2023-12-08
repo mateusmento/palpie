@@ -2,9 +2,12 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../entities/product.entity';
 import { Repository } from 'typeorm';
+import { IsNumber, IsOptional } from 'class-validator';
 
 export class FindProducts {
-  categoryId: number;
+  @IsNumber()
+  @IsOptional()
+  categoryId?: number;
 }
 
 @QueryHandler(FindProducts)
