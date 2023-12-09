@@ -83,6 +83,13 @@ resource "aws_security_group" "palpie-api-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    protocol = "tcp"
+    from_port = 22
+    to_port = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     protocol    = "-1"
     from_port   = 0
@@ -100,9 +107,54 @@ resource "aws_instance" "palpie-api" {
   instance_type          = "t2.micro"
   key_name               = "aws-palpie"
   vpc_security_group_ids = [aws_security_group.palpie-api-sg.id]
-  user_data              = file("./install-palpie-api.sh")
+  user_data              = templatefile("./install-palpie-api.sh", {
+    palpie_postgres_host = aws_instance.palpie-postgres.public_dns
+  })
   tags = {
     Name = "palpie-api"
+  }
+}
+
+resource "aws_security_group" "palpie-app-sg" {
+  name   = "palpie-app-sg"
+  vpc_id = data.aws_vpc.default.id
+
+  ingress {
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol = "tcp"
+    from_port = 22
+    to_port = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "palpie-app-sg"
+  }
+}
+
+resource "aws_instance" "palpie-app" {
+  ami                    = "ami-05dc908211c15c11d"
+  instance_type          = "t2.micro"
+  key_name               = "aws-palpie"
+  vpc_security_group_ids = [aws_security_group.palpie-app-sg.id]
+  user_data              = templatefile("./install-palpie-app.sh", {
+    palpie_api_host = aws_instance.palpie-api.public_dns
+  })
+  tags = {
+    Name = "palpie-app"
   }
 }
 
@@ -112,4 +164,8 @@ output "palpie-postgres-host" {
 
 output "palpie-api-host" {
   value = aws_instance.palpie-api.public_dns
+}
+
+output "palpie-app-host" {
+  value = aws_instance.palpie-app.public_dns
 }
