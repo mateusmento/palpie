@@ -4,6 +4,13 @@ yum install git -y
 git clone https://github.com/mateusmento/palpie
 cd palpie/api
 
+yum install docker -y
+systemctl start docker
+systemctl enable docker
+usermod -aG docker $USER
+newgrp docker
+
+
 export HOME=~
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 source ~/.bashrc
