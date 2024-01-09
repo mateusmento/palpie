@@ -1,6 +1,7 @@
 import { InjectAxios } from '@/core/axios';
 import type { Product } from './product.type';
 import { Axios } from 'axios';
+import { injectable } from 'tsyringe';
 
 export type FindProductsCriteria = { categoryId?: number };
 
@@ -9,6 +10,7 @@ export interface IProductApi {
   create(data: Partial<Product>): Promise<Product>;
 }
 
+@injectable()
 export class ProductsApi implements IProductApi {
   constructor(@InjectAxios() private axios: Axios) {}
 

@@ -1,8 +1,10 @@
 import { InjectAxios } from '@/core/axios';
 import type { Axios } from 'axios';
+import { injectable } from 'tsyringe';
 
 export type FindCategoryCriteria = { name?: string };
 
+@injectable()
 export class CategoriesApi {
   constructor(@InjectAxios() private axios: Axios) {}
 
