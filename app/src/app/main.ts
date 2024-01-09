@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import '@/assets/main.scss';
 
 import { createApp } from 'vue';
