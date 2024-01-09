@@ -1,13 +1,16 @@
-import axios from '@/core/axios';
+import { InjectAxios } from '@/core/axios';
+import type { Axios } from 'axios';
 
 export type FindCategoryCriteria = { name?: string };
 
 export class CategoriesApi {
+  constructor(@InjectAxios() private axios: Axios) {}
+
   findAll(criteria: FindCategoryCriteria = {}) {
-    return axios.get<any[]>('/categories', { params: criteria }).then((res) => res.data);
+    return this.axios.get<any[]>('/categories', { params: criteria }).then((res) => res.data);
   }
 
   create(data: any) {
-    return axios.post('/categories', data).then((res) => res.data);
+    return this.axios.post('/categories', data).then((res) => res.data);
   }
 }
