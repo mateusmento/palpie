@@ -48,14 +48,14 @@ function createProduct() {
         class="grid rows-sm"
         class-input="p-sm"
       />
-      <Field name="categories" label="Category" class="grid rows-sm">
+      <!-- <Field name="categories" label="Category" class="grid rows-sm">
         <Multiselect
           :options="searchCategories"
           track-by="id"
           label-by="name"
           class-search="p-sm"
         />
-      </Field>
+      </Field> -->
       <div class="grid cols-md w-fit ml-auto">
         <Button type="reset" class="p-sm">Clear</Button>
         <Button type="submit" class="p-sm">Send</Button>
