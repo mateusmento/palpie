@@ -6,9 +6,10 @@ import { useProductsStore } from '@/domain/products/products.store';
 import { CategoriesApi } from '@/domain/products/categories.api';
 import Multiselect from '@/components/Multiselect.vue';
 import type { Product } from '@/domain/products/product.type';
+import { useInjectable } from '@/core/dependecy-injection';
 
 const productStore = useProductsStore();
-const categoryApi = new CategoriesApi();
+const categoryApi = useInjectable(CategoriesApi);
 
 function searchCategories(query: string) {
   return categoryApi.findAll({ name: query });

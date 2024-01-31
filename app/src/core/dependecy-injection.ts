@@ -2,11 +2,13 @@ import { ProductsApi } from '@/domain/products/products.api';
 import { container, type DependencyContainer, type InjectionToken } from 'tsyringe';
 import { createAxios } from './axios';
 import { inject } from 'vue';
+import { CategoriesApi } from '@/domain/products/categories.api';
 
 export function createDependencyContainer() {
   const diContainer = container.createChildContainer();
   diContainer.registerInstance('axios', createAxios());
   diContainer.registerSingleton(ProductsApi);
+  diContainer.registerSingleton(CategoriesApi);
   return diContainer;
 }
 
